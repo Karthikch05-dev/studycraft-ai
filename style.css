@@ -509,7 +509,7 @@ button:active {
 .form-group select {
   width: 100%;
   padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(var(--bg-primary-rgb), 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   color: var(--text-primary);
@@ -523,6 +523,12 @@ button:active {
   border-color: var(--accent-blue);
   box-shadow: 0 0 0 3px var(--glow-blue);
   background: rgba(255, 255, 255, 0.15);
+}
+
+/* Select Dropdown Options */
+option {
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .cta-button {
