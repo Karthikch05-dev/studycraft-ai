@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - AI Study Roadmap Planner</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="login-page">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 0.5rem;">
+          <span class="logo-text">StudyCraft AI</span>
+          <span class="logo-dot"></span>
+        </a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="login-wrapper">
+    <div class="container login-container">
+    <h1>AI Study Roadmap Planner</h1>
+
+    <div class="google-login">
+      <button onclick="loginWithGoogle()" class="google-btn">
+        <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo" class="google-icon">
+        Continue with Google
+      </button>
+    </div>
+
+    <div class="divider">
+      <span>or</span>
+    </div>
+
+    <div id="login-form">
+      <h2>Login</h2>
+      <input id="login-username" placeholder="Username" />
+      <input id="login-password" type="password" placeholder="Password" />
+      <button onclick="login()">Login</button>
+      <p id="login-error" class="error"></p>
+      <p>Don't have an account? <a href="#" onclick="showSignup()">Sign up</a></p>
+    </div>
+
+    <div id="signup-form" style="display: none;">
+      <h2>Sign Up</h2>
+      <input id="signup-username" placeholder="Username" />
+      <input id="signup-password" type="password" placeholder="Password" />
+      <button onclick="signup()">Sign Up</button>
+      <p id="signup-error" class="error"></p>
+      <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+    </div>
+
+    <p id="loading"></p>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "your-api-key",
+      authDomain: "your-project.firebaseapp.com",
+      projectId: "your-project-id",
+      storageBucket: "your-project.appspot.com",
+      messagingSenderId: "123456789",
+      appId: "your-app-id"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    window.loginWithGoogle = async function() {
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        // Store user info in localStorage for simplicity
+        localStorage.setItem('user', JSON.stringify({
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName
+        }));
+        window.location.href = '/';
+      } catch (error) {
+        console.error('Login failed:', error);
+        alert('Login failed. Please try again.');
+      }
+    };
+
+    // Check if already logged in
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        window.location.href = '/';
+      }
+    });
+  </script>
+  </div>
+</body>
+</html>
