@@ -4,8 +4,12 @@
   "type": "module",
   "main": "script.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "vite"
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview",
+  "start": "node server.js"
+}
+
   },
   "license": "ISC",
   "dependencies": {
