@@ -15,10 +15,14 @@
       <div class="logo">
         <a href="/index.html" style="text-decoration: none; color: inherit;">
           <span class="logo-text">StudyCraft AI</span>
-          <span class="logo-dot"></span>
         </a>
       </div>
-      <ul class="nav-links">
+      <button class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
         <li><a href="/index.html">Home</a></li>
         <li><a href="/features.html">Features</a></li>
         <li><a href="/about.html">About</a></li>
@@ -90,25 +94,31 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const themeToggle = document.getElementById('theme-toggle');
-      if (!themeToggle) return;
+      // Hamburger menu functionality
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('nav-links');
 
-      const themeIcon = themeToggle.querySelector('.theme-icon');
-      const currentTheme = localStorage.getItem('theme') || 'dark';
+      if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+          navLinks.classList.toggle('open');
+          hamburger.classList.toggle('open');
+        });
 
-      document.documentElement.setAttribute('data-theme', currentTheme);
-      updateThemeIcon(currentTheme);
+        // Close menu when clicking on a link
+        navLinks.addEventListener('click', (e) => {
+          if (e.target.tagName === 'A') {
+            navLinks.classList.remove('open');
+            hamburger.classList.remove('open');
+          }
+        });
 
-      themeToggle.addEventListener('click', () => {
-        const theme = document.documentElement.getAttribute('data-theme');
-        const newTheme = theme === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
-      });
-
-      function updateThemeIcon(theme) {
-        themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+            navLinks.classList.remove('open');
+            hamburger.classList.remove('open');
+          }
+        });
       }
     });
   </script>

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login - AI Study Roadmap Planner</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -16,15 +17,18 @@
           <span class="logo-dot"></span>
         </a>
       </div>
-      <ul class="nav-links">
+      <button class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
         <li><a href="/index.html">Home</a></li>
         <li><a href="/features.html">Features</a></li>
         <li><a href="/about.html">About</a></li>
         <li><a href="/login.html" class="cta-link">Login</a></li>
       </ul>
-      <button id="theme-toggle" class="theme-toggle-btn">
-        <span class="theme-icon">🌙</span>
-      </button>
+
     </div>
   </nav>
 
@@ -126,30 +130,7 @@
 });
 
   </script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const themeToggle = document.getElementById('theme-toggle');
-      if (!themeToggle) return;
 
-      const themeIcon = themeToggle.querySelector('.theme-icon');
-      const currentTheme = localStorage.getItem('theme') || 'dark';
-
-      document.documentElement.setAttribute('data-theme', currentTheme);
-      updateThemeIcon(currentTheme);
-
-      themeToggle.addEventListener('click', () => {
-        const theme = document.documentElement.getAttribute('data-theme');
-        const newTheme = theme === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme);
-      });
-
-      function updateThemeIcon(theme) {
-        themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
-      }
-    });
-  </script>
   <script>
     async function login() {
       const username = document.getElementById('login-username').value;
