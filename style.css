@@ -1,6 +1,7 @@
 /* CSS Variables for Colors */
 :root {
   --bg-primary: #0a0a0f;
+  --bg-primary-rgb: 10, 10, 15;
   --bg-secondary: #1a1a2e;
   --bg-tertiary: #16213e;
   --text-primary: #ffffff;
@@ -14,12 +15,66 @@
   --navbar-height: 80px;
 }
 
+/* Light Mode Variables */
+[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-primary-rgb: 255, 255, 255;
+  --bg-secondary: #f0f8ff;
+  --bg-tertiary: #e6f3ff;
+  --text-primary: #1a365d;
+  --text-secondary: #4a5568;
+  --accent-blue: #3182ce;
+  --accent-purple: #805ad5;
+  --accent-violet: #d53f8c;
+  --glow-blue: rgba(49, 130, 206, 0.4);
+  --glow-purple: rgba(128, 90, 213, 0.4);
+  --glow-violet: rgba(213, 63, 140, 0.4);
+}
+
+/* Light Mode Specific Styles */
+[data-theme="light"] .logo-dot {
+  box-shadow: 0 0 10px var(--glow-blue), 0 0 20px var(--glow-purple);
+}
+
+[data-theme="light"] .cta-link {
+  box-shadow: 0 0 20px var(--glow-blue);
+}
+
+[data-theme="light"] .cta-link:hover {
+  box-shadow: 0 0 30px var(--glow-purple);
+}
+
+[data-theme="light"] .cta-button {
+  box-shadow: 0 4px 20px var(--glow-blue);
+}
+
+[data-theme="light"] .cta-button:hover {
+  box-shadow: 0 8px 30px var(--glow-purple);
+}
+
+[data-theme="light"] .feature-card:hover {
+  box-shadow: 0 20px 40px var(--glow-blue);
+}
+
+[data-theme="light"] .info-card:hover {
+  box-shadow: 0 20px 40px var(--glow-blue);
+}
+
+[data-theme="light"] .stat-number {
+  text-shadow: 0 0 20px var(--glow-blue);
+}
+
 /* Global Reset & Smoothness */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Theme Transition */
+body {
+  transition: background 0.5s ease, color 0.5s ease;
 }
 
 body {
@@ -297,7 +352,7 @@ button:active {
   position: fixed;
   top: 0;
   width: 100%;
-  background: rgba(10, 10, 15, 0.8);
+  background: rgba(var(--bg-primary-rgb), 0.8);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 1000;
@@ -360,6 +415,32 @@ button:active {
 
 .cta-link:hover {
   box-shadow: 0 0 30px var(--glow-purple);
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.theme-icon {
+  transition: transform 0.3s ease;
 }
 
 /* Hero Section */

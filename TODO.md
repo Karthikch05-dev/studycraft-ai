@@ -1,6 +1,7 @@
-# TODO List for Adding Home Button and Navigation to Login Page
+# TODO: Improve Light Mode UI Attractiveness
 
-- [x] Edit index.html: Add Home link beside Features in the nav-links ul
-- [x] Edit about.html: Add Home link beside Features in the nav-links ul
-- [x] Edit features.html: Add Home link beside Features in the nav-links ul
-- [x] Edit login.html: Add a navbar section with Home, Features, About links
+## Tasks
+- [x] Update navbar background to be theme-aware instead of hardcoded dark
+- [x] Enhance light mode color variables with gradients and better accents
+- [x] Add subtle glows to light mode elements to match dark mode appeal
+- [x] Test the changes to ensure logo visibility and overall attractiveness
