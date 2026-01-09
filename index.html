@@ -7,32 +7,35 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
   <!-- Navbar -->
   <nav class="navbar">
-  <div class="nav-container">
-    <div class="logo">
-      <a href="/index.html" style="text-decoration: none; color: inherit;">
-        <span class="logo-text">StudyCraft AI</span>
-        <span class="logo-dot"></span>
-      </a>
+    <div class="nav-container">
+      <div class="logo">
+        <a href="/" style="text-decoration: none; color: inherit;">
+          <span class="logo-text">StudyCraft AI</span>
+          <span class="logo-dot"></span>
+        </a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/features">Features</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/login" class="cta-link">Login</a></li>
+      </ul>
     </div>
-    <ul class="nav-links">
-      <li><a href="/index.html">Home</a></li>
-      <li><a href="/features.html">Features</a></li>
-      <li><a href="/about.html">About</a></li>
-      <li><a href="/login.html" class="cta-link">Login</a></li>
-    </ul>
-  </div>
-</nav>
-
+  </nav>
 
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-container">
       <div class="hero-content">
         <h1 class="hero-title">AI-Powered Study Roadmaps</h1>
-        <p class="hero-subtitle">Create personalized, intelligent study plans tailored to your goals. Powered by advanced AI for optimal learning.</p>
-        
+        <p class="hero-subtitle">
+          Create personalized, intelligent study plans tailored to your goals.
+          Powered by advanced AI for optimal learning.
+        </p>
+
         <div class="hero-form">
           <div class="form-group">
             <label for="exam">Exam:</label>
@@ -63,7 +66,9 @@
             </select>
           </div>
 
-          <button onclick="generateRoadmap()" class="cta-button">Generate Roadmap</button>
+          <button onclick="generateRoadmap()" class="cta-button">
+            Generate Roadmap
+          </button>
         </div>
 
         <p id="loading" class="loading-text"></p>
@@ -80,26 +85,38 @@
         Simply input your exam type, subjects, daily study hours, duration, and difficulty level to
         receive a comprehensive, adaptive study plan designed for optimal learning and success.
       </p>
+
       <div class="info-features">
         <div class="info-card">
           <div class="info-icon">🧠</div>
           <h3>Smart Planning</h3>
-          <p>AI analyzes your inputs to create the perfect study schedule that fits your lifestyle and goals.</p>
+          <p>
+            AI analyzes your inputs to create the perfect study schedule that fits your lifestyle and goals.
+          </p>
         </div>
+
         <div class="info-card">
           <div class="info-icon">⚖️</div>
           <h3>Balanced Schedule</h3>
-          <p>Distributes study time evenly across subjects with built-in breaks to prevent burnout.</p>
+          <p>
+            Distributes study time evenly across subjects with built-in breaks to prevent burnout.
+          </p>
         </div>
+
         <div class="info-card">
           <div class="info-icon">📈</div>
           <h3>Adaptive Difficulty</h3>
-          <p>Adjusts content complexity based on your skill level and learning progress over time.</p>
+          <p>
+            Adjusts content complexity based on your skill level and learning progress over time.
+          </p>
         </div>
+
         <div class="info-card">
           <div class="info-icon">🔄</div>
           <h3>Revision Focus</h3>
-          <p>Incorporates strategic revision sessions to reinforce learning and improve retention.</p>
+          <p>
+            Incorporates strategic revision sessions to reinforce learning and improve retention.
+          </p>
         </div>
       </div>
     </div>
