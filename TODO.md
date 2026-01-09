@@ -1,7 +1,7 @@
-# TODO: Improve Light Mode UI Attractiveness
+# TODO: Fix Navbar Links for Vercel Deployment
 
-## Tasks
-- [x] Update navbar background to be theme-aware instead of hardcoded dark
-- [x] Enhance light mode color variables with gradients and better accents
-- [x] Add subtle glows to light mode elements to match dark mode appeal
-- [x] Test the changes to ensure logo visibility and overall attractiveness
+- [x] Update navbar links in index.html to use absolute paths (/index.html, /features.html, /about.html, /login.html)
+- [x] Update navbar links in features.html to use absolute paths (/index.html, /features.html, /about.html, /login.html)
+- [x] Update navbar links in about.html to use absolute paths (/index.html, /features.html, /about.html, /login.html)
+- [x] Update navbar links in login.html to use absolute paths (/index.html, /features.html, /about.html)
+- [x] Update logo links in all HTML files to use absolute paths (/index.html)
