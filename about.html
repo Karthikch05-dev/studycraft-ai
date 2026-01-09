@@ -12,17 +12,20 @@
   <nav class="navbar">
     <div class="nav-container">
       <div class="logo">
-        <a href="/" style="text-decoration: none; color: inherit;">
+        <a href="/index.html" style="text-decoration: none; color: inherit;">
           <span class="logo-text">StudyCraft AI</span>
           <span class="logo-dot"></span>
         </a>
       </div>
       <ul class="nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/features">Features</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/login" class="cta-link">Login</a></li>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/features.html">Features</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/login.html" class="cta-link">Login</a></li>
       </ul>
+      <button id="theme-toggle" class="theme-toggle-btn">
+        <span class="theme-icon">🌙</span>
+      </button>
     </div>
   </nav>
 
@@ -73,6 +76,30 @@
     </div>
   </section>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeToggle = document.getElementById('theme-toggle');
+      if (!themeToggle) return;
+
+      const themeIcon = themeToggle.querySelector('.theme-icon');
+      const currentTheme = localStorage.getItem('theme') || 'dark';
+
+      document.documentElement.setAttribute('data-theme', currentTheme);
+      updateThemeIcon(currentTheme);
+
+      themeToggle.addEventListener('click', () => {
+        const theme = document.documentElement.getAttribute('data-theme');
+        const newTheme = theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+      });
+
+      function updateThemeIcon(theme) {
+        themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+      }
+    });
+  </script>
   <script type="module" src="script.js"></script>
 </body>
 </html>

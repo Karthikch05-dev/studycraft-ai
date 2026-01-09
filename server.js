@@ -154,6 +154,27 @@ Return only the roadmap.`;
   }
 });
 
+// Routes for HTML pages
+app.get('/', (req, res) => {
+  res.sendFile('index.html', { root: '.' });
+});
+
+app.get('/index.html', (req, res) => {
+  res.sendFile('index.html', { root: '.' });
+});
+
+app.get('/features.html', (req, res) => {
+  res.sendFile('features.html', { root: '.' });
+});
+
+app.get('/about.html', (req, res) => {
+  res.sendFile('about.html', { root: '.' });
+});
+
+app.get('/login.html', (req, res) => {
+  res.sendFile('login.html', { root: '.' });
+});
+
 app.listen(3001, () => {
   console.log("✅ Server running on http://localhost:3001");
 });
