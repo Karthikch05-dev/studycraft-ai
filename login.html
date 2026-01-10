@@ -27,6 +27,11 @@
         <li><a href="/features.html">Features</a></li>
         <li><a href="/about.html">About</a></li>
         <li id="auth-link"><a href="/login.html" class="cta-link">Login</a></li>
+        <li>
+          <button class="theme-toggle-btn" id="theme-toggle">
+            <span class="theme-icon">🌙</span>
+          </button>
+        </li>
       </ul>
 
     </div>
@@ -205,6 +210,31 @@
       document.getElementById('signup-form').style.display = 'none';
       document.getElementById('login-form').style.display = 'block';
     }
+
+    // Theme Toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeToggle = document.getElementById('theme-toggle');
+      const themeIcon = themeToggle?.querySelector('.theme-icon');
+      const currentTheme = localStorage.getItem('theme') || 'dark';
+
+      document.documentElement.setAttribute('data-theme', currentTheme);
+      if (themeIcon) themeIcon.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
+
+      themeToggle?.addEventListener('click', () => {
+        const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        if (themeIcon) themeIcon.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+      });
+
+      // Hamburger menu
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('nav-links');
+      hamburger?.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+        hamburger.classList.toggle('open');
+      });
+    });
   </script>
 </body>
 </html>
