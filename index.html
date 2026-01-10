@@ -170,27 +170,7 @@
           }
         });
       }
-
-      // Update auth link based on login status
-      updateAuthLink();
     });
-
-    function updateAuthLink() {
-      const authLink = document.getElementById('auth-link');
-      const user = JSON.parse(localStorage.getItem('user'));
-      
-      if (user && user.displayName) {
-        authLink.innerHTML = `
-          <span class="user-name">${user.displayName.split(' ')[0]}</span>
-          <a href="#" onclick="logout()" class="cta-link">Logout</a>
-        `;
-      }
-    }
-
-    function logout() {
-      localStorage.removeItem('user');
-      window.location.href = '/login.html';
-    }
   </script>
   <script type="module" src="script.js"></script>
 </body>

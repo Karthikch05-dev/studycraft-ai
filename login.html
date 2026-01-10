@@ -125,7 +125,16 @@
     };
 
     auth.onAuthStateChanged((user) => {
-      if (user && window.location.pathname.includes("/login")) {
+      if (user) {
+        // User is logged in, redirect to home
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName
+          })
+        );
         window.location.href = "/index.html";
       }
     });

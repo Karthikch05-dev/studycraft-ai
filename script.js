@@ -20,7 +20,40 @@ let currentUser = null;
 
 onAuthStateChanged(auth, (user) => {
   currentUser = user;
+  // Update navbar when auth state changes
+  updateAuthLink();
 });
+
+/* ================================
+   UPDATE NAVBAR AUTH LINK
+================================ */
+function updateAuthLink() {
+  const authLink = document.getElementById('auth-link');
+  if (!authLink) return;
+
+  if (currentUser) {
+    const displayName = currentUser.displayName || currentUser.email || 'User';
+    authLink.innerHTML = `
+      <span class="user-name">${displayName.split(' ')[0]}</span>
+      <a href="#" onclick="logout()" class="cta-link">Logout</a>
+    `;
+  } else {
+    authLink.innerHTML = `<a href="/login.html" class="cta-link">Login</a>`;
+  }
+}
+
+/* ================================
+   LOGOUT
+================================ */
+window.logout = async function() {
+  try {
+    await auth.signOut();
+    localStorage.removeItem('user');
+    window.location.href = '/login.html';
+  } catch (error) {
+    console.error('Logout error:', error);
+  }
+}
 
 /* ================================
    ROADMAP GENERATION
