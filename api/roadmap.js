@@ -22,10 +22,6 @@ Daily study hours: ${hours}
 Difficulty level: ${level}
 
 Format EACH line exactly as: Day X | Topic | Task
-Example:
-Day 1 | Physics - Mechanics | Study Newton's Laws, solve 10 problems
-Day 2 | Chemistry - Organic | Learn functional groups, practice reactions
-
 Generate the complete ${duration}-day roadmap:`;
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -37,7 +33,7 @@ Generate the complete ${duration}-day roadmap:`;
       body: JSON.stringify({
         model: 'gpt-3.5-turbo',
         messages: [
-          { role: 'system', content: 'You are a study planning expert. Format output as: Day X | Topic | Task' },
+          { role: 'system', content: 'You are a study planning expert. Format: Day X | Topic | Task' },
           { role: 'user', content: prompt }
         ],
         max_tokens: 2000,
