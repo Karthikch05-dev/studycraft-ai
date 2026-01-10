@@ -15,7 +15,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    const apiKey = process.env.OPENAI_API_KEY;
+    const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) {
       console.error('No API key found');
       return res.status(500).json({ error: 'API key not configured' });
@@ -29,16 +29,16 @@ Difficulty level: ${level}
 Format EACH line exactly as: Day X | Topic | Task
 Generate the complete ${duration}-day roadmap:`;
 
-    console.log('Calling OpenAI...');
+    console.log('Calling Groq API...');
 
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
+        model: 'llama-3.1-8b-instant',
         messages: [
           { role: 'system', content: 'You are a study planning expert. Format: Day X | Topic | Task' },
           { role: 'user', content: prompt }
@@ -49,11 +49,11 @@ Generate the complete ${duration}-day roadmap:`;
     });
 
     const responseText = await response.text();
-    console.log('OpenAI response status:', response.status);
-    console.log('OpenAI response:', responseText);
+    console.log('Groq API response status:', response.status);
+    console.log('Groq API response:', responseText);
 
     if (!response.ok) {
-      return res.status(500).json({ error: `OpenAI error: ${response.status}`, details: responseText });
+      return res.status(500).json({ error: `API error: ${response.status}`, details: responseText });
     }
 
     const data = JSON.parse(responseText);
