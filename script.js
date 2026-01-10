@@ -62,11 +62,13 @@ window.generateRoadmap = async function() {
       body: JSON.stringify({ exam, subjects, hours, duration, level })
     });
 
+    const data = await response.json();
+    console.log('API Response:', data);
+
     if (!response.ok) {
-      throw new Error('Backend error');
+      throw new Error(data.error || data.details || 'Backend error');
     }
 
-    const data = await response.json();
     const tableHTML = parseRoadmapToTable(data.roadmap);
 
     loadingEl.innerText = '';
@@ -74,9 +76,9 @@ window.generateRoadmap = async function() {
     resultEl.classList.add('show');
 
   } catch (error) {
-    console.error(error);
+    console.error('Full error:', error);
     loadingEl.innerText = '';
-    resultEl.innerHTML = '<p class="error">⚠️ Unable to generate roadmap. Please try again.</p>';
+    resultEl.innerHTML = `<p class="error">⚠️ ${error.message}</p>`;
     resultEl.classList.add('show');
   }
 }

@@ -7,14 +7,19 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { exam, subjects, hours, duration, level } = req.body;
+    const { exam, subjects, hours, duration, level } = req.body || {};
+
+    console.log('Received:', { exam, subjects, hours, duration, level });
 
     if (!exam || !subjects || !hours || !duration) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
     const apiKey = process.env.OPENAI_API_KEY;
-    if (!apiKey) return res.status(500).json({ error: 'API key not configured' });
+    if (!apiKey) {
+      console.error('No API key found');
+      return res.status(500).json({ error: 'API key not configured' });
+    }
 
     const prompt = `Create a ${duration}-day study roadmap for ${exam} exam.
 Subjects: ${subjects}
@@ -23,6 +28,8 @@ Difficulty level: ${level}
 
 Format EACH line exactly as: Day X | Topic | Task
 Generate the complete ${duration}-day roadmap:`;
+
+    console.log('Calling OpenAI...');
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -41,13 +48,19 @@ Generate the complete ${duration}-day roadmap:`;
       })
     });
 
-    if (!response.ok) return res.status(500).json({ error: 'Failed to generate roadmap' });
+    const responseText = await response.text();
+    console.log('OpenAI response status:', response.status);
+    console.log('OpenAI response:', responseText);
 
-    const data = await response.json();
+    if (!response.ok) {
+      return res.status(500).json({ error: `OpenAI error: ${response.status}`, details: responseText });
+    }
+
+    const data = JSON.parse(responseText);
     return res.status(200).json({ roadmap: data.choices[0]?.message?.content || 'No roadmap' });
 
   } catch (error) {
-    console.error('Server error:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    console.error('Server error:', error.message);
+    return res.status(500).json({ error: 'Internal server error', details: error.message });
   }
 }
