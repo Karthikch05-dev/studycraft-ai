@@ -53,20 +53,20 @@
 
       <div id="login-form">
         <h2>Login</h2>
-        <input id="login-email" type="email" placeholder="Email" />
-        <input id="login-password" type="password" placeholder="Password" />
-        <button onclick="login()">Login</button>
+        <input id="login-email" type="email" placeholder="Email" onkeydown="handleLoginEnter(event, 'login-password')" />
+        <input id="login-password" type="password" placeholder="Password" onkeydown="handleLoginEnter(event, 'login-submit')" />
+        <button id="login-submit" onclick="login()" class="cta-button">Login</button>
         <p id="login-error" class="error"></p>
         <p>Don't have an account? <a href="#" onclick="showSignup()">Sign up</a></p>
       </div>
 
       <div id="signup-form" style="display: none;">
         <h2>Sign Up</h2>
-        <input id="signup-name" type="text" placeholder="Full Name" />
-        <input id="signup-email" type="email" placeholder="Email" />
-        <input id="signup-password" type="password" placeholder="Password (min 6 characters)" />
-        <input id="signup-confirm-password" type="password" placeholder="Confirm Password" />
-        <button onclick="signup()">Sign Up</button>
+        <input id="signup-name" type="text" placeholder="Full Name" onkeydown="handleLoginEnter(event, 'signup-email')" />
+        <input id="signup-email" type="email" placeholder="Email" onkeydown="handleLoginEnter(event, 'signup-password')" />
+        <input id="signup-password" type="password" placeholder="Password (min 6 characters)" onkeydown="handleLoginEnter(event, 'signup-confirm-password')" />
+        <input id="signup-confirm-password" type="password" placeholder="Confirm Password" onkeydown="handleLoginEnter(event, 'signup-submit')" />
+        <button id="signup-submit" onclick="signup()" class="cta-button">Sign Up</button>
         <p id="signup-error" class="error"></p>
         <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
       </div>
@@ -202,6 +202,18 @@
   </script>
 
   <script>
+    function handleLoginEnter(event, nextFieldId) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        const nextField = document.getElementById(nextFieldId);
+        if (nextFieldId.includes('submit')) {
+          nextField.click();
+        } else {
+          nextField.focus();
+        }
+      }
+    }
+
     function showSignup() {
       document.getElementById('login-form').style.display = 'none';
       document.getElementById('signup-form').style.display = 'block';

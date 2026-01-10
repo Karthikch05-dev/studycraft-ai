@@ -107,12 +107,16 @@ window.generateRoadmap = async function() {
     loadingEl.innerText = '';
     resultEl.innerHTML = tableHTML;
     resultEl.classList.add('show');
+    
+    // Show download button
+    document.getElementById('download-btn').style.display = 'block';
 
   } catch (error) {
     console.error('Full error:', error);
     loadingEl.innerText = '';
     resultEl.innerHTML = `<p class="error">⚠️ ${error.message}</p>`;
     resultEl.classList.add('show');
+    document.getElementById('download-btn').style.display = 'none';
   }
 }
 

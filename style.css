@@ -1161,6 +1161,40 @@ option {
   transform: rotate(-45deg) translate(6px, -6px);
 }
 
+/* Login Container Buttons - Match CTA style */
+.login-container button:not(.google-btn):not(.theme-toggle-btn) {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px var(--glow-blue);
+  margin-top: 1rem;
+}
+
+.login-container button:not(.google-btn):not(.theme-toggle-btn):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px var(--glow-purple);
+}
+
+.login-container button:not(.google-btn):not(.theme-toggle-btn):active {
+  transform: translateY(0);
+}
+
+/* Download Button */
+.download-btn {
+  margin-top: 2rem;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
 /* Tablet Responsive */
 @media (max-width: 1024px) {
   .nav-container {
@@ -1469,80 +1503,80 @@ option {
     line-height: 1.2;
   }
 
-  .hero-subtitle {
-    font-size: 0.95rem;
+  .hero-subtitle {  .form-group label {
+    font-size: 0.95rem;85rem;
     margin-bottom: 1.5rem;
   }
-
-  .hero-form {
-    padding: 1.2rem;
-  }
-
-  .form-group label {
-    font-size: 0.85rem;
-  }
-
   .form-group input,
-  .form-group select {
-    padding: 0.7rem 0.8rem;
-    font-size: 0.95rem;
-    min-height: 44px;
+  .hero-form {ect {
+    padding: 1.2rem;8rem;
   }
-
-  .cta-button {
-    padding: 0.9rem 1.2rem;
-    font-size: 0.95rem;
-    min-height: 44px;
+ min-height: 44px;
   }
-
-  .features-section {
-    padding: 3rem 1rem;
-  }
-
-  .section-title {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-  }
-
   .feature-card {
     padding: 1.2rem;
-  }
-
-  .feature-icon {
+  };
+ font-size: 0.95rem;
+  .feature-icon {    min-height: 44px;
     font-size: 2.5rem;
     margin-bottom: 0.8rem;
-  }
-
+  }features-section {
+    padding: 3rem 1rem;
   .feature-card h3 {
     font-size: 1rem;
-    margin-bottom: 0.8rem;
-  }
-
+    margin-bottom: 0.8rem;section-title {
+  }    font-size: 1.8rem;
+m: 1.5rem;
   .about-section {
     padding: 3rem 1rem;
-  }
-
+  }  .feature-card {
+2rem;
   .about-text {
     font-size: 0.95rem;
-  }
-
-  .stat-number {
+  }  .feature-icon {
+5rem;
+  .stat-number {;
     font-size: 1.8rem;
   }
-
+ h3 {
   .stat-label {
-    font-size: 0.75rem;
-  }
+    font-size: 0.75rem; margin-bottom: 0.8rem;
+  }  }
 
   .info-section {
-    padding: 1.5rem 1rem;
-  }
+    padding: 1.5rem 1rem; padding: 3rem 1rem;
+  }  }
 
   .info-title {
-    font-size: 1.8rem;
-  }
+    font-size: 1.8rem; font-size: 0.95rem;
+  }  }
 
   .info-description {
+    font-size: 0.95rem; font-size: 1.8rem;
+  }  }
+
+  .info-card {
+    padding: 1.2rem 0.8rem; font-size: 0.75rem;
+  }  }
+
+  .info-icon {
+    font-size: 2.5rem; padding: 1.5rem 1rem;
+  }  }
+
+  .info-card h3 {
+    font-size: 1rem; font-size: 1.8rem;
+  } }
+
+
+
+
+
+
+
+
+
+
+}  }    padding: 0.8rem;  .login-wrapper {  }    font-size: 0.85rem;  .info-card p {  .info-description {
     font-size: 0.95rem;
   }
 
