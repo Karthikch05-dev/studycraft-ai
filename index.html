@@ -36,7 +36,7 @@
         <li><a href="/index.html">Home</a></li>
         <li><a href="/features.html">Features</a></li>
         <li><a href="/about.html">About</a></li>
-        <li><a href="/login.html" class="cta-link">Login</a></li>
+        <li id="auth-link"><a href="/login.html" class="cta-link">Login</a></li>
       </ul>
 
     </div>
@@ -156,7 +156,6 @@
           hamburger.classList.toggle('open');
         });
 
-        // Close menu when clicking on a link
         navLinks.addEventListener('click', (e) => {
           if (e.target.tagName === 'A') {
             navLinks.classList.remove('open');
@@ -164,7 +163,6 @@
           }
         });
 
-        // Close menu when clicking outside
         document.addEventListener('click', (e) => {
           if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
             navLinks.classList.remove('open');
@@ -172,7 +170,27 @@
           }
         });
       }
+
+      // Update auth link based on login status
+      updateAuthLink();
     });
+
+    function updateAuthLink() {
+      const authLink = document.getElementById('auth-link');
+      const user = JSON.parse(localStorage.getItem('user'));
+      
+      if (user && user.displayName) {
+        authLink.innerHTML = `
+          <span class="user-name">${user.displayName.split(' ')[0]}</span>
+          <a href="#" onclick="logout()" class="cta-link">Logout</a>
+        `;
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('user');
+      window.location.href = '/login.html';
+    }
   </script>
   <script type="module" src="script.js"></script>
 </body>
