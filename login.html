@@ -58,7 +58,7 @@
 
       <div id="login-form">
         <h2>Login</h2>
-        <input id="login-username" placeholder="Username" />
+        <input id="login-email" type="email" placeholder="Email" />
         <input id="login-password" type="password" placeholder="Password" />
         <button onclick="login()">Login</button>
         <p id="login-error" class="error"></p>
@@ -70,79 +70,208 @@
 
       <div id="signup-form" style="display: none;">
         <h2>Sign Up</h2>
-        <input id="signup-username" placeholder="Username" />
-        <input id="signup-password" type="password" placeholder="Password" />
-        <button onclick="signup()">Sign Up</button>
-        <p id="signup-error" class="error"></p>
+        <input id="signup-name" type="text" placeholder="Full Name" />
+        <input id="signup-email" type="email" placeholder="Email" />
+        <input id="signup-password" type="password" placeholder="Password (min 6 characters)" /> placeholder="Password" />
+        <input id="signup-confirm-password" type="password" placeholder="Confirm Password" />e="password" placeholder="Confirm Password" />
+        <button onclick="signup()">Sign Up</button>tton onclick="signup()">Sign Up</button>
+        <p id="signup-error" class="error"></p>="error"></p>
         <p>
-          Already have an account?
-          <a href="#" onclick="showLogin()">Login</a>
-        </p>
+          Already have an account?ready have an account?
+          <a href="#" onclick="showLogin()">Login</a> href="#" onclick="showLogin()">Login</a>
+        </p>        </p>
       </div>
 
-      <p id="loading"></p>
-    </div>
+      <p id="loading"></p> id="loading"></p>
+    </div>    </div>
   </div>
 
   <!-- Firebase SDK -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  <script type="module">pe="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";nitializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import {
       getAuth,
       GoogleAuthProvider,
-      signInWithPopup
-    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
+      signInWithPopup      signInWithPopup,
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";assword,
+word,
     // Firebase configuration
-    const firebaseConfig = {
+    const firebaseConfig = {rebase-auth.js";
       apiKey: "AIzaSyA-6wm65YIu-EtRC5z1YJ65HT9D418j9lc",
       authDomain: "studycraft-ai-3257a.firebaseapp.com",
       projectId: "studycraft-ai-3257a",
       storageBucket: "studycraft-ai-3257a.firebasestorage.app",
-      messagingSenderId: "549698898950",
-      appId: "1:549698898950:web:3d1699af5bbcd6e40b0787",
-      measurementId: "G-180LBNQQGL"
+      messagingSenderId: "549698898950",57a.firebaseapp.com",
+      appId: "1:549698898950:web:3d1699af5bbcd6e40b0787",projectId: "studycraft-ai-3257a",
+      measurementId: "G-180LBNQQGL"      storageBucket: "studycraft-ai-3257a.firebasestorage.app",
     };
-
+eb:3d1699af5bbcd6e40b0787",
     const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+    const auth = getAuth(app);};
     const provider = new GoogleAuthProvider();
-    
+    baseConfig);
     // Force account selection every time
-    provider.setCustomParameters({
-      prompt: 'select_account'
+    provider.setCustomParameters({st provider = new GoogleAuthProvider();
+      prompt: 'select_account'    
     });
-
+t: 'select_account'
     window.loginWithGoogle = async function () {
       try {
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
+        const result = await signInWithPopup(auth, provider);    // Google Login
+        const user = result.user;async function () {
 
-        localStorage.setItem(
-          "user",
+        localStorage.setItem(it signInWithPopup(auth, provider);
+          "user",t.user;
           JSON.stringify({
             uid: user.uid,
-            email: user.email,
-            displayName: user.displayName
-          })
+            email: user.email,ser",
+            displayName: user.displayNameJSON.stringify({
+          })            uid: user.uid,
         );
-
+: user.displayName
         window.location.href = "/index.html";
       } catch (error) {
         console.error("Login failed:", error);
-        alert("Login failed: " + error.message);
-      }
-    };
-
+        alert("Login failed: " + error.message);  window.location.href = "/index.html";
+      }      } catch (error) {
+    };error);
+gin failed: " + error.message);
     auth.onAuthStateChanged((user) => {
       if (user) {
         // User is logged in, redirect to home
+        localStorage.setItem(n
+          "user",unction () {
+          JSON.stringify({etElementById('login-email').value.trim();
+            uid: user.uid,tById('login-password').value;
+            email: user.email,errorEl = document.getElementById('login-error');
+            displayName: user.displayNamet loadingEl = document.getElementById('loading');
+          })
+        );rrorEl.textContent = '';
+        window.location.href = "/index.html";
+      }email || !password) {
+    });        errorEl.textContent = 'Please fill all fields';
+  </script>turn;
+
+  <script>
+    async function login() {
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      const errorEl = document.getElementById('login-error');ssword);
+      errorEl.textContent = '';st user = result.user;
+      document.getElementById('loading').textContent = 'Logging in...';
+      try {tem(
+        const response = await fetch('/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }, uid: user.uid,
+          body: JSON.stringify({ email, password })
+        });ser.displayName || email.split('@')[0]
+        const data = await response.json();
+        if (response.ok) {
+          window.location.href = '/';
+        } else {indow.location.href = "/index.html";
+          errorEl.textContent = data.error;
+        };
+      } catch (error) {.code === 'auth/user-not-found') {
+        errorEl.textContent = 'Login failed';email';
+      } finally { } else if (error.code === 'auth/wrong-password') {
+        document.getElementById('loading').textContent = '';     errorEl.textContent = 'Incorrect password';
+      }        } else if (error.code === 'auth/invalid-email') {
+    } = 'Invalid email address';
+
+    async function signup() {
+      const name = document.getElementById('signup-name').value;
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      const confirmPassword = document.getElementById('signup-confirm-password').value;
+      const errorEl = document.getElementById('signup-error');
+      errorEl.textContent = '';
+      document.getElementById('loading').textContent = 'Signing up...';
+      try {
+        // Basic client-side validation name = document.getElementById('signup-name').value.trim();
+        if (password !== confirmPassword) {('signup-email').value.trim();
+          errorEl.textContent = 'Passwords do not match';ument.getElementById('signup-password').value;
+          return;t.getElementById('signup-confirm-password').value;
+        }rEl = document.getElementById('signup-error');
+        if (password.length < 6) {ById('loading');
+          errorEl.textContent = 'Password must be at least 6 characters';
+          return;nt = '';
+        }
+| !email || !password || !confirmPassword) {
+        const response = await fetch('/signup', {
+          method: 'POST', return;
+          headers: { 'Content-Type': 'application/json' }, }
+          body: JSON.stringify({ name, email, password })
+        });irmPassword) {
+        const data = await response.json();
+        if (response.ok) {
+          window.location.href = '/'; }
+        } else {
+          errorEl.textContent = data.error;< 6) {
+        }s';
+      } catch (error) {
+        errorEl.textContent = 'Signup failed'; }
+      } finally {
+        document.getElementById('loading').textContent = '';tContent = 'Creating account...';
+      }
+    }
+email, password);
+    function showSignup() {
+      document.getElementById('login-form').style.display = 'none';
+      document.getElementById('signup-form').style.display = 'block';
+    }
+          displayName: name
+    function showLogin() {
+      document.getElementById('signup-form').style.display = 'none';
+      document.getElementById('login-form').style.display = 'block';
+    }
+
+    // Theme Toggle   uid: user.uid,
+    document.addEventListener('DOMContentLoaded', () => {            email: user.email,
+      const themeToggle = document.getElementById('theme-toggle');: name
+      const themeIcon = themeToggle?.querySelector('.theme-icon');
+      const currentTheme = localStorage.getItem('theme') || 'dark';
+
+      document.documentElement.setAttribute('data-theme', currentTheme);y!');
+      if (themeIcon) themeIcon.textContent = currentTheme === 'dark' ? '🌙' : '☀️';";
+atch (error) {
+      themeToggle?.addEventListener('click', () => { console.error("Signup failed:", error);
+        const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';(error.code === 'auth/email-already-in-use') {
+        document.documentElement.setAttribute('data-theme', newTheme);   errorEl.textContent = 'Email already registered. Please login.';
+        localStorage.setItem('theme', newTheme); } else if (error.code === 'auth/invalid-email') {
+        if (themeIcon) themeIcon.textContent = newTheme === 'dark' ? '🌙' : '☀️';          errorEl.textContent = 'Invalid email address';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html></body>  </script>    });      });        hamburger.classList.toggle('open');        navLinks.classList.toggle('open');      hamburger?.addEventListener('click', () => {      const navLinks = document.getElementById('nav-links');      const hamburger = document.getElementById('hamburger');      // Hamburger menu      });        } else if (error.code === 'auth/weak-password') {
+          errorEl.textContent = 'Password is too weak';
+        } else {
+          errorEl.textContent = error.message;
+        }
+      } finally {
+        loadingEl.textContent = '';
+      }
+    };
+
+    // Check auth state
+    auth.onAuthStateChanged((user) => {
+      if (user) {
         localStorage.setItem(
           "user",
           JSON.stringify({
             uid: user.uid,
             email: user.email,
-            displayName: user.displayName
+            displayName: user.displayName || user.email?.split('@')[0]
           })
         );
         window.location.href = "/index.html";
@@ -151,56 +280,6 @@
   </script>
 
   <script>
-    async function login() {
-      const username = document.getElementById('login-username').value;
-      const password = document.getElementById('login-password').value;
-      const errorEl = document.getElementById('login-error');
-      errorEl.textContent = '';
-      document.getElementById('loading').textContent = 'Logging in...';
-      try {
-        const response = await fetch('/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, password })
-        });
-        const data = await response.json();
-        if (response.ok) {
-          window.location.href = '/';
-        } else {
-          errorEl.textContent = data.error;
-        }
-      } catch (error) {
-        errorEl.textContent = 'Login failed';
-      } finally {
-        document.getElementById('loading').textContent = '';
-      }
-    }
-
-    async function signup() {
-      const username = document.getElementById('signup-username').value;
-      const password = document.getElementById('signup-password').value;
-      const errorEl = document.getElementById('signup-error');
-      errorEl.textContent = '';
-      document.getElementById('loading').textContent = 'Signing up...';
-      try {
-        const response = await fetch('/signup', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, password })
-        });
-        const data = await response.json();
-        if (response.ok) {
-          window.location.href = '/';
-        } else {
-          errorEl.textContent = data.error;
-        }
-      } catch (error) {
-        errorEl.textContent = 'Signup failed';
-      } finally {
-        document.getElementById('loading').textContent = '';
-      }
-    }
-
     function showSignup() {
       document.getElementById('login-form').style.display = 'none';
       document.getElementById('signup-form').style.display = 'block';
@@ -211,7 +290,7 @@
       document.getElementById('login-form').style.display = 'block';
     }
 
-    // Theme Toggle
+    // Theme Toggle & Hamburger
     document.addEventListener('DOMContentLoaded', () => {
       const themeToggle = document.getElementById('theme-toggle');
       const themeIcon = themeToggle?.querySelector('.theme-icon');
@@ -227,7 +306,6 @@
         if (themeIcon) themeIcon.textContent = newTheme === 'dark' ? '🌙' : '☀️';
       });
 
-      // Hamburger menu
       const hamburger = document.getElementById('hamburger');
       const navLinks = document.getElementById('nav-links');
       hamburger?.addEventListener('click', () => {
