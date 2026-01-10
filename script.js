@@ -109,14 +109,17 @@ window.generateRoadmap = async function() {
     resultEl.classList.add('show');
     
     // Show download button
-    document.getElementById('download-btn').style.display = 'block';
+    const downloadBtn = document.getElementById('download-btn');
+    if (downloadBtn) downloadBtn.style.display = 'block';
 
   } catch (error) {
     console.error('Full error:', error);
     loadingEl.innerText = '';
     resultEl.innerHTML = `<p class="error">⚠️ ${error.message}</p>`;
     resultEl.classList.add('show');
-    document.getElementById('download-btn').style.display = 'none';
+    
+    const downloadBtn = document.getElementById('download-btn');
+    if (downloadBtn) downloadBtn.style.display = 'none';
   }
 }
 

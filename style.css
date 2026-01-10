@@ -1503,80 +1503,80 @@ option {
     line-height: 1.2;
   }
 
-  .hero-subtitle {  .form-group label {
-    font-size: 0.95rem;85rem;
+  .hero-subtitle {
+    font-size: 0.95rem;
     margin-bottom: 1.5rem;
   }
+
+  .hero-form {
+    padding: 1.2rem;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+  }
+
   .form-group input,
-  .hero-form {ect {
-    padding: 1.2rem;8rem;
+  .form-group select {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.95rem;
+    min-height: 44px;
   }
- min-height: 44px;
+
+  .cta-button {
+    padding: 0.9rem 1.2rem;
+    font-size: 0.95rem;
+    min-height: 44px;
   }
+
+  .features-section {
+    padding: 3rem 1rem;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
   .feature-card {
     padding: 1.2rem;
-  };
- font-size: 0.95rem;
-  .feature-icon {    min-height: 44px;
+  }
+
+  .feature-icon {
     font-size: 2.5rem;
     margin-bottom: 0.8rem;
-  }features-section {
-    padding: 3rem 1rem;
+  }
+
   .feature-card h3 {
     font-size: 1rem;
-    margin-bottom: 0.8rem;section-title {
-  }    font-size: 1.8rem;
-m: 1.5rem;
+    margin-bottom: 0.8rem;
+  }
+
   .about-section {
     padding: 3rem 1rem;
-  }  .feature-card {
-2rem;
+  }
+
   .about-text {
     font-size: 0.95rem;
-  }  .feature-icon {
-5rem;
-  .stat-number {;
+  }
+
+  .stat-number {
     font-size: 1.8rem;
   }
- h3 {
+
   .stat-label {
-    font-size: 0.75rem; margin-bottom: 0.8rem;
-  }  }
+    font-size: 0.75rem;
+  }
 
   .info-section {
-    padding: 1.5rem 1rem; padding: 3rem 1rem;
-  }  }
+    padding: 1.5rem 1rem;
+  }
 
   .info-title {
-    font-size: 1.8rem; font-size: 0.95rem;
-  }  }
+    font-size: 1.8rem;
+  }
 
   .info-description {
-    font-size: 0.95rem; font-size: 1.8rem;
-  }  }
-
-  .info-card {
-    padding: 1.2rem 0.8rem; font-size: 0.75rem;
-  }  }
-
-  .info-icon {
-    font-size: 2.5rem; padding: 1.5rem 1rem;
-  }  }
-
-  .info-card h3 {
-    font-size: 1rem; font-size: 1.8rem;
-  } }
-
-
-
-
-
-
-
-
-
-
-}  }    padding: 0.8rem;  .login-wrapper {  }    font-size: 0.85rem;  .info-card p {  .info-description {
     font-size: 0.95rem;
   }
 
@@ -1598,5 +1598,21 @@ m: 1.5rem;
 
   .login-wrapper {
     padding: 0.8rem;
+  }
+
+  .container {
+    padding: 15px;
+    margin: 20px auto;
+  }
+
+  .roadmap-table {
+    font-size: 0.8rem;
+    overflow-x: auto;
+  }
+
+  .roadmap-table th,
+  .roadmap-table td {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.8rem;
   }
 }
