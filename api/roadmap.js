@@ -21,8 +21,12 @@ Subjects: ${subjects}
 Daily study hours: ${hours}
 Difficulty level: ${level}
 
-Format EACH line as: Day X | Topic | Task
-Generate the complete roadmap:`;
+Format EACH line exactly as: Day X | Topic | Task
+Example:
+Day 1 | Physics - Mechanics | Study Newton's Laws, solve 10 problems
+Day 2 | Chemistry - Organic | Learn functional groups, practice reactions
+
+Generate the complete ${duration}-day roadmap:`;
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -33,10 +37,11 @@ Generate the complete roadmap:`;
       body: JSON.stringify({
         model: 'gpt-3.5-turbo',
         messages: [
-          { role: 'system', content: 'You are a study planning expert. Format: Day X | Topic | Task' },
+          { role: 'system', content: 'You are a study planning expert. Format output as: Day X | Topic | Task' },
           { role: 'user', content: prompt }
         ],
-        max_tokens: 2000
+        max_tokens: 2000,
+        temperature: 0.7
       })
     });
 
@@ -46,6 +51,7 @@ Generate the complete roadmap:`;
     return res.status(200).json({ roadmap: data.choices[0]?.message?.content || 'No roadmap' });
 
   } catch (error) {
+    console.error('Server error:', error);
     return res.status(500).json({ error: 'Internal server error' });
   }
 }

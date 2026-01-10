@@ -90,12 +90,13 @@
 
     // Firebase configuration
     const firebaseConfig = {
-      apiKey: "your-api-key",
-      authDomain: "your-project.firebaseapp.com",
-      projectId: "your-project-id",
-      storageBucket: "your-project.appspot.com",
-      messagingSenderId: "123456789",
-      appId: "your-app-id"
+      apiKey: "AIzaSyA-6wm65YIu-EtRC5z1YJ65HT9D418j9lc",
+      authDomain: "studycraft-ai-3257a.firebaseapp.com",
+      projectId: "studycraft-ai-3257a",
+      storageBucket: "studycraft-ai-3257a.firebasestorage.app",
+      messagingSenderId: "549698898950",
+      appId: "1:549698898950:web:3d1699af5bbcd6e40b0787",
+      measurementId: "G-180LBNQQGL"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -116,19 +117,18 @@
           })
         );
 
-        window.location.href = "/";
+        window.location.href = "/index.html";
       } catch (error) {
         console.error("Login failed:", error);
-        alert("Login failed. Please try again.");
+        alert("Login failed: " + error.message);
       }
     };
 
     auth.onAuthStateChanged((user) => {
-  if (user && window.location.pathname === "/login") {
-    window.location.href = "/";
-  }
-});
-
+      if (user && window.location.pathname.includes("/login")) {
+        window.location.href = "/index.html";
+      }
+    });
   </script>
 
   <script>

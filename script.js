@@ -2,15 +2,16 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 /* ================================
-   FIREBASE CONFIG - Replace with your config
+   FIREBASE CONFIG
 ================================ */
 const firebaseConfig = {
-  apiKey: "YOUR_FIREBASE_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyA-6wm65YIu-EtRC5z1YJ65HT9D418j9lc",
+  authDomain: "studycraft-ai-3257a.firebaseapp.com",
+  projectId: "studycraft-ai-3257a",
+  storageBucket: "studycraft-ai-3257a.firebasestorage.app",
+  messagingSenderId: "549698898950",
+  appId: "1:549698898950:web:3d1699af5bbcd6e40b0787",
+  measurementId: "G-180LBNQQGL"
 };
 
 const app = initializeApp(firebaseConfig);
