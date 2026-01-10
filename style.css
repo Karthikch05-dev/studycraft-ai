@@ -1079,6 +1079,20 @@ option {
   flex-direction: column;
 }
 
+/* Hamburger - Add this after .nav-links styles, before media queries */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+}
+
 /* Tablet Responsive */
 @media (max-width: 1024px) {
   .nav-container {
@@ -1181,23 +1195,6 @@ option {
 
   .hamburger {
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 30px;
-    height: 30px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 1001;
-  }
-
-  .hamburger span {
-    width: 100%;
-    height: 3px;
-    background: var(--text-primary);
-    transition: all 0.3s ease;
-    transform-origin: center;
   }
 
   .hamburger.open span:nth-child(1) {
@@ -1219,8 +1216,8 @@ option {
   }
 
   .hero {
-    padding: 120px 1rem 2rem;
-    min-height: 90vh;
+    padding: 100px 1rem 2rem;
+    min-height: auto;
   }
 
   .hero-container {
@@ -1410,7 +1407,7 @@ option {
   }
 
   .hero {
-    padding: 750px 1rem 1.5rem;
+    padding: 90px 1rem 1.5rem;
   }
 
   .hero-title {
@@ -1509,32 +1506,6 @@ option {
 
   .info-card p {
     font-size: 0.85rem;
-  }
-
-  .container {
-    padding: 15px;
-    margin: 20px auto;
-  }
-
-  .roadmap-table {
-    font-size: 0.8rem;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .roadmap-table th,
-  .roadmap-table td {
-    padding: 0.5rem 0.6rem;
-    font-size: 0.8rem;
-    white-space: nowrap;
-    min-width: 80px;
-  }
-
-  .roadmap-table th {
-    position: sticky;
-    top: 0;
-    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-    z-index: 1;
   }
 
   .login-wrapper {

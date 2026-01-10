@@ -1,9 +1,20 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 /* ================================
-   AUTH STATE (SAFE, NON-INTRUSIVE)
+   FIREBASE CONFIG - Replace with your config
 ================================ */
-const auth = getAuth();
+const firebaseConfig = {
+  apiKey: "YOUR_FIREBASE_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 let currentUser = null;
 
 onAuthStateChanged(auth, (user) => {
@@ -11,9 +22,9 @@ onAuthStateChanged(auth, (user) => {
 });
 
 /* ================================
-   ROADMAP GENERATION (LOGIN ONLY)
+   ROADMAP GENERATION
 ================================ */
-async function generateRoadmap() {
+window.generateRoadmap = async function() {
   const exam = document.getElementById('exam')?.value.trim();
   const subjects = document.getElementById('subjects')?.value.trim();
   const hours = document.getElementById('hours')?.value.trim();
@@ -28,10 +39,9 @@ async function generateRoadmap() {
     return;
   }
 
-  // 🔐 Login required ONLY here
   if (!currentUser) {
     alert("Please login to generate a roadmap.");
-    window.location.href = "/login";
+    window.location.href = "/login.html";
     return;
   }
 
@@ -42,8 +52,6 @@ async function generateRoadmap() {
   try {
     const idToken = await currentUser.getIdToken();
 
-    // ⚠️ IMPORTANT:
-    // Replace this URL AFTER backend is deployed
     const response = await fetch('/api/roadmap', {
       method: 'POST',
       headers: {
@@ -58,9 +66,7 @@ async function generateRoadmap() {
     }
 
     const data = await response.json();
-    const roadmapText = data.roadmap;
-
-    const tableHTML = parseRoadmapToTable(roadmapText);
+    const tableHTML = parseRoadmapToTable(data.roadmap);
 
     loadingEl.innerText = '';
     resultEl.innerHTML = tableHTML;
@@ -69,7 +75,7 @@ async function generateRoadmap() {
   } catch (error) {
     console.error(error);
     loadingEl.innerText = '';
-    resultEl.innerHTML = '<p>⚠️ Unable to generate roadmap. Please try again.</p>';
+    resultEl.innerHTML = '<p class="error">⚠️ Unable to generate roadmap. Please try again.</p>';
     resultEl.classList.add('show');
   }
 }
@@ -79,17 +85,7 @@ async function generateRoadmap() {
 ================================ */
 function parseRoadmapToTable(text) {
   const lines = text.split('\n').filter(line => line.trim());
-  let table = `
-    <table class="roadmap-table">
-      <thead>
-        <tr>
-          <th>Day</th>
-          <th>Topics</th>
-          <th>Task</th>
-        </tr>
-      </thead>
-      <tbody>
-  `;
+  let table = `<table class="roadmap-table"><thead><tr><th>Day</th><th>Topics</th><th>Task</th></tr></thead><tbody>`;
 
   for (const line of lines) {
     const parts = line.split('|').map(p => p.trim());
@@ -103,7 +99,7 @@ function parseRoadmapToTable(text) {
 }
 
 /* ================================
-   THEME TOGGLE (UNCHANGED)
+   THEME TOGGLE
 ================================ */
 document.addEventListener('DOMContentLoaded', () => {
   const themeToggle = document.getElementById('theme-toggle');
@@ -113,17 +109,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const currentTheme = localStorage.getItem('theme') || 'dark';
 
   document.documentElement.setAttribute('data-theme', currentTheme);
-  updateThemeIcon(currentTheme);
+  if (themeIcon) themeIcon.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
 
   themeToggle.addEventListener('click', () => {
-    const theme = document.documentElement.getAttribute('data-theme');
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
-    updateThemeIcon(newTheme);
+    if (themeIcon) themeIcon.textContent = newTheme === 'dark' ? '🌙' : '☀️';
   });
-
-  function updateThemeIcon(theme) {
-    themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
-  }
 });
